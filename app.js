@@ -2,15 +2,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid')
     const flagsLeft = document.querySelector('#flags-left')
     const result = document.getElementById('result')
+    const refresh = document.getElementById('refresh')
+    const selectDifficulty = document.getElementById('difficulty');
     const width = 10
-    var bombAmount = 20
+    var bombAmount = 15
+    flagsLeft.innerHTML = (bombAmount).toString().padStart(3, '0')
+    
+    selectDifficulty.addEventListener('change', function() {
+        const selectedDifficulty = selectDifficulty.value
+        if (selectedDifficulty == "easy") {
+            console.log("15")
+            bombAmount = 15
+        } else if ((selectedDifficulty == "medium")) {
+            console.log("25")
+            bombAmount = 25
+        } else {
+            console.log("35")
+            bombAmount = 35
+        }
+        flagsLeft.innerHTML = (bombAmount).toString().padStart(3, '0')
+    })
+    
+    
     var squares = []
     var isGameOver = false
     var flags = 0
+    
+    refresh.addEventListener('click',()=>window.location.reload())
 
     function createBord(){
-        flagsLeft.innerHTML = bombAmount
-
+        
+        
         const bombArray = Array(bombAmount).fill('bomb')
         const emptyArray = Array(width*width - bombAmount).fill('valid')
         const gameArray = emptyArray.concat(bombArray)
@@ -46,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(!rightEdge && i < squares.length - width && squares[i  + width + 1].classList.contains('bomb')) total++
                 
                 squares[i].setAttribute('data', total)
+                squares[i].innerHTML = total
 
             }
         }
@@ -54,20 +77,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addFlag(square){
         if (isGameOver) return
-        if (!square.classList.contains('flag') && (flags <= bombAmount)){
+        if (!square.classList.contains('flag') && (flags < bombAmount)){
             if (!square.classList.contains('flag')){
                 square.classList.add('flag')
                 flags++
                 square.innerHTML = '🚩'
-                flagsLeft.innerHTML = bombAmount - flags
+                flagsLeft.innerHTML = (bombAmount - flags).toString().padStart(3, '0')
                 checkWin()
             }
-        } else {
+        } else if (square.classList.contains('flag')){
             square.classList.remove('flag')
             flags--
             square.innerHTML = ''
-            flagsLeft.innerHTML = bombAmount - flags
-        }
+            flagsLeft.innerHTML = (bombAmount - flags).toString().padStart(3, '0')
+        } else return
     }
 
     function checkWin(){
@@ -82,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function click(square){
+        console.log(bombAmount)
         if (isGameOver || square.classList.contains('checked') || square.classList.contains('flag')) return
         if (square.classList.contains('bomb')){
             gameOver()
@@ -149,6 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function gameOver(){
         result.innerHTML = "Boom!! Game Over"
+        refresh.innerHTML = '🙁'
         isGameOver = true
 
         squares.forEach(function(square){

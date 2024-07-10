@@ -1,14 +1,30 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    font-family: "Roboto Mono", monospace;
+    font-weight: bold;
+}
+
 .container{
     width: 500px;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 420px;
+
 }
 
 .grid{
     height: 400px;
     width: 400px;
     background-color: #dcd6bc;
-    margin-left: 50px;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin: 10px 0px;
     border: 10px solid #dcd6bc;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
@@ -39,5 +55,41 @@ div{
     cursor: auto;
 }
 
+#flags-left{
+    width: 80px;
+    height: 35px;
+    font-size: 30px;
+    background-color: rgb(39, 3, 3);
+    color: rgb(206, 72, 72);
+    font-family: 'Seven Segment', sans-serif;
+    align-self: flex-start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+#refresh{
+    cursor: pointer;
+    font-size: 30px;
+}
+
+#difficulty{
+    font-family: "Roboto Mono", monospace;
+    font-size: 15px;
+    width: 80px;
+    height: 35px;
+}
+
+#result{
+    height: 40px;
+    border: 1px solid red;
+    width: 420px;
+}
+
+footer{
+    text-align: center;
+    font-size: 25px;
+    color: #0E2431;
+    margin-top: 100px;
+}
 

@@ -5,14 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minesweeper</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <script src="app.js"></script>
 </head>
 <body>
     <div class="container">
+        <header>
+            <div id="flags-left"></div>
+            <div id="refresh">😊</div>
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>     
+        </header>
         <div class="grid"></div>
-        <div>Flags left : <span id="flags-left"></span></div>
         <div id="result"></div>
     </div>
+    <footer>Project done by <a href="https://portfolio-nizar-kouki.netlify.app/" target="_blank">Nizar KOUKI</a></footer>
 </body>
 </html>
