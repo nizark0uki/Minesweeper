@@ -10,19 +10,24 @@
     <script src="app.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div id="flags-left"></div>
-            <div id="refresh">😀</div>
-            <select id="difficulty">
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>     
-        </header>
-        <div class="grid"></div>
-        <div id="result"></div>
+    <div id="play">
+        <img id="playBtn" src="/images/playBtn.png" alt="playBtn">
     </div>
-    <footer>Project done by <a href="https://portfolio-nizar-kouki.netlify.app/" target="_blank">Nizar KOUKI</a></footer>
+    <div id="game-page" class="hidden">
+        <div class="container">
+            <header >
+                <div id="flags-left"></div>
+                <div id="refresh">😀</div>
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>     
+            </header>
+            <div class="grid"></div>
+            <div id="result"></div>
+            <footer>Project done by <a href="https://portfolio-nizar-kouki.netlify.app/" target="_blank">Nizar KOUKI</a></footer>
+        </div>
+    </div>
 </body>
 </html>

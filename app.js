@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+    playBtn = document.getElementById('playBtn')
+    playBtn.addEventListener("click", ()=>{
+        const gamePage = document.getElementById('game-page')
+        const play = document.getElementById('play')
+        gamePage.classList.remove('hidden')
+        play.classList.add('hidden')
+    });
+    
+    
+    
     const grid = document.querySelector('.grid')
     const flagsLeft = document.querySelector('#flags-left')
     const result = document.getElementById('result')
@@ -26,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
     var flags = 0
     
     refresh.addEventListener('click',()=>{
-        if (isGameOver) window.location.reload()
+        if (isGameOver) resetGame()
         else{
             alert('Are You Sure !')
-            window.location.reload()
+            resetGame()
         }
     })
 
@@ -58,16 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 start = new Date().getTime();
                 longPressTimeout = setTimeout(function() {
                     addFlag(square);
-                }, 500);
+                }, 300);
             });
 
             square.addEventListener('touchend', function(event) {
                 clearTimeout(longPressTimeout);
                 var end = new Date().getTime();
-                if ((end - start) < 500) {
+                if ((end - start) < 300) {
                     click(square);
                 }
-            });
+            })
         } else {
             square.addEventListener('click', function(e) {
                 if (e.ctrlKey) {
@@ -96,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(!rightEdge && i < squares.length - width && squares[i  + width + 1].classList.contains('bomb')) total++
                 
                 squares[i].setAttribute('data', total)
-                squares[i].innerHTML = total
+                // squares[i].innerHTML = total
 
             }
         }

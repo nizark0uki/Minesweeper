@@ -8,8 +8,15 @@ body{
     font-weight: bold;
 }
 
+.hidden{
+    display: none;
+}
+
+img{
+    cursor: pointer;
+}
+
 .container{
-    width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -98,3 +105,36 @@ footer{
 
 }
 
+
+@media (max-width : 430px){
+    .grid{
+        width: 350px;
+        height: 350px;
+    }
+    .valid, .bomb{
+        width: 35px;
+        height: 35px;
+    }
+    header{
+        width: 370px;
+    }
+    footer{
+        font-size: 20PX;
+    }
+}
+
+@media (max-height : 720px){
+    footer{
+        margin-top: 50px;
+    }
+}
+
+@media (max-height : 660px){
+    .container{
+        margin-top: 50px;
+    }
+    footer{
+        margin-top: 40px;
+    }
+    
+}
