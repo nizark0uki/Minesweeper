@@ -11,32 +11,35 @@ document.addEventListener('DOMContentLoaded', () => {
     selectDifficulty.addEventListener('change', function() {
         const selectedDifficulty = selectDifficulty.value
         if (selectedDifficulty == "easy") {
-            console.log("15")
             bombAmount = 15
         } else if ((selectedDifficulty == "medium")) {
-            console.log("25")
             bombAmount = 25
         } else {
-            console.log("35")
             bombAmount = 35
         }
         flagsLeft.innerHTML = (bombAmount).toString().padStart(3, '0')
+        resetGame()
     })
-    
     
     var squares = []
     var isGameOver = false
     var flags = 0
     
-    refresh.addEventListener('click',()=>window.location.reload())
+    refresh.addEventListener('click',()=>{
+        if (isGameOver) window.location.reload()
+        else{
+            alert('Are You Sure !')
+            window.location.reload()
+        }
+    })
 
-    function createBord(){
-        
-        
+    function createBoard(){
         const bombArray = Array(bombAmount).fill('bomb')
         const emptyArray = Array(width*width - bombAmount).fill('valid')
         const gameArray = emptyArray.concat(bombArray)
         const shuffledArray = gameArray.sort(() => Math.random() - 0.5)
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        
 
         for(var i = 0; i < width*width; i++){
             const square = document.createElement('div')
@@ -45,10 +48,35 @@ document.addEventListener('DOMContentLoaded', () => {
             grid.appendChild(square)
             squares.push(square)
 
-            square.addEventListener('click', function(e){
-                if (e.ctrlKey && e.button === 0) {
-                    addFlag(square)
-                } else click(square)})
+            
+
+        if (isMobile) {
+            var start;
+            var longPressTimeout;
+
+            square.addEventListener('touchstart', function(event) {
+                start = new Date().getTime();
+                longPressTimeout = setTimeout(function() {
+                    addFlag(square);
+                }, 500);
+            });
+
+            square.addEventListener('touchend', function(event) {
+                clearTimeout(longPressTimeout);
+                var end = new Date().getTime();
+                if ((end - start) < 500) {
+                    click(square);
+                }
+            });
+        } else {
+            square.addEventListener('click', function(e) {
+                if (e.ctrlKey) {
+                    addFlag(square);
+                } else {
+                    click(square);
+                }
+            });
+        }
             
         }
 
@@ -73,7 +101,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-    createBord()
+    createBoard()
+
+    function resetGame() {
+        result.innerHTML = ''
+        refresh.innerHTML = '😀'
+        isGameOver = false
+        flags = 0
+        squares = []
+        grid.innerHTML = ''
+        createBoard()
+    }
 
     function addFlag(square){
         if (isGameOver) return
@@ -108,7 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(bombAmount)
         if (isGameOver || square.classList.contains('checked') || square.classList.contains('flag')) return
         if (square.classList.contains('bomb')){
-            gameOver()
+            
+            gameOver(square)
         } else{
             var total = square.getAttribute('data')
             if (total !=0) {
@@ -171,18 +210,21 @@ document.addEventListener('DOMContentLoaded', () => {
         },10)
     }
 
-    function gameOver(){
+    function gameOver(square){
         result.innerHTML = "Boom!! Game Over"
         refresh.innerHTML = '🙁'
         isGameOver = true
-
+        square.style.backgroundColor = 'rgb(206, 72, 72)'
         squares.forEach(function(square){
             if (square.classList.contains('bomb')){
                 square.innerHTML ='💣'
                 square.classList.remove('bomb')
                 square.classList.add('checked')
-            }
+            } else if (!square.classList.contains('bomb') && square.classList.contains('flag'))
+                square.innerHTML = '❌'
         })
     }
+
+    
 
 });
