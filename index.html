@@ -10,24 +10,57 @@
     <script src="app.js"></script>
 </head>
 <body>
-    <div id="play">
-        <img id="playBtn" src="/images/playBtn.png" alt="playBtn">
+    <audio id="audio" src="music/AdhesiveWombat - Night Shade  NO COPYRIGHT 8-bit Music.mp3"></audio>
+    
+    <div id="home-page" class="play">
+        <img id="playBtn" src="images/playBtn.png" alt="playBtn">
+        <div id="music" class="toggle-container">
+            <span>MUSIC</span>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <button id="howToPlayBtn">How to Play ?</button>
+
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <h2>How to Play Minesweeper</h2>
+                <p>Minesweeper is a classic puzzle game where the objective is to clear a board containing hidden mines without detonating any of them, with help from clues about the number of neighboring mines in each field.</p>
+                <ul>
+                    <li>The game board consists of a grid of squares, some of which contain mines.</li>
+                    <li>Left click on a square to reveal what is underneath it.</li>
+                    <li>If you reveal a mine, you lose the game.</li>
+                    <li>If you reveal an empty square, a number may appear in the square. This number indicates how many of the surrounding squares contain mines.</li>
+                    <li>Use these numbers to deduce which nearby squares contain mines and which are safe to click.</li>
+                    <li>ctrl and left click (or long press on mobile) to place a flag on squares you believe contain mines.</li>
+                    <li>Click the smiley face to Restart the game</li>
+                    <li>The game is won when all mines are flagged correctly.</li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div id="game-page" class="hidden">
+        
         <div class="container">
-            <header >
+            <div id="menu" >
+                <img id="pause" src="images/pauseBtn.jpg" alt="pauseBtn">
+            </div>
+            
+            <header>
                 <div id="flags-left"></div>
                 <div id="refresh">😀</div>
                 <select id="difficulty">
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
-                </select>     
+                </select>
             </header>
             <div class="grid"></div>
             <div id="result"></div>
-            <footer>Project done by <a href="https://portfolio-nizar-kouki.netlify.app/" target="_blank">Nizar KOUKI</a></footer>
         </div>
+        <footer>Project done by <a href="https://portfolio-nizar-kouki.netlify.app/" target="_blank">Nizar KOUKI</a></footer>
     </div>
 </body>
 </html>

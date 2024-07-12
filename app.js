@@ -1,19 +1,67 @@
-document.addEventListener('DOMContentLoaded', () => {
-    playBtn = document.getElementById('playBtn')
-    playBtn.addEventListener("click", ()=>{
-        const gamePage = document.getElementById('game-page')
-        const play = document.getElementById('play')
+document.addEventListener('DOMContentLoaded', (event) => {
+    const playBtn = document.getElementById('playBtn')
+    const pauseBtn = document.getElementById('pause')
+    const gamePage = document.getElementById('game-page')
+    const homePage = document.getElementById('home-page')
+    const music = document.getElementById('music')
+    const howToPlayBtn = document.getElementById('howToPlayBtn')
+    const menu = document.getElementById('menu')
+    playBtn.addEventListener("click", () => {
+        
         gamePage.classList.remove('hidden')
-        play.classList.add('hidden')
-    });
+        gamePage.classList.add('style')
+        homePage.classList.add('hidden')
+        homePage.classList.remove('play')
+        console.log(music)
+        console.log(pauseBtn)
+        menu.insertBefore(music, pauseBtn)
+        music.style.display='flex'
+        
+    })
     
+    pauseBtn.addEventListener("click", () => {
+        gamePage.classList.add('hidden')
+        gamePage.classList.remove('style')
+        homePage.classList.remove('hidden')
+        homePage.classList.add('play')
+        homePage.insertBefore(music, howToPlayBtn)
+    })
+
+    var checkbox = document.querySelector('input[type="checkbox"]')
+    var audio = document.getElementById("audio")
+    if (checkbox.checked) audio.play()
+    checkbox.addEventListener('change', function () {
+        if (checkbox.checked) {
+          audio.play()
+        } else {
+          audio.pause()
+        }
+    })
+    
+    
+    const popup = document.getElementById('popup')
+    const closeBtn = document.querySelector('.close')
+
+    howToPlayBtn.addEventListener('click', () => {
+        popup.style.display = 'block'
+    });
+
+    closeBtn.addEventListener('click', () => {
+        popup.style.display = 'none'
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === popup) {
+            popup.style.display = 'none'
+        }
+    });
     
     
     const grid = document.querySelector('.grid')
     const flagsLeft = document.querySelector('#flags-left')
     const result = document.getElementById('result')
     const refresh = document.getElementById('refresh')
-    const selectDifficulty = document.getElementById('difficulty');
+    const selectDifficulty = document.getElementById('difficulty')
     const width = 10
     var bombAmount = 15
     flagsLeft.innerHTML = (bombAmount).toString().padStart(3, '0')
@@ -68,13 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 start = new Date().getTime();
                 longPressTimeout = setTimeout(function() {
                     addFlag(square);
-                }, 300);
+                }, 200);
             });
 
             square.addEventListener('touchend', function(event) {
                 clearTimeout(longPressTimeout);
                 var end = new Date().getTime();
-                if ((end - start) < 300) {
+                if ((end - start) < 200) {
                     click(square);
                 }
             })
@@ -118,8 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
         refresh.innerHTML = '😀'
         isGameOver = false
         flags = 0
+        flagsLeft
         squares = []
         grid.innerHTML = ''
+        flagsLeft.innerHTML = (bombAmount).toString().padStart(3, '0')
         createBoard()
     }
 

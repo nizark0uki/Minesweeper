@@ -1,4 +1,5 @@
 body{
+    margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,16 +7,171 @@ body{
     height: 90vh;
     font-family: "Roboto Mono", monospace;
     font-weight: bold;
+    background-color: #68747a;
+    user-select: none;
 }
 
 .hidden{
     display: none;
 }
 
+
+/*---- HomePage ----*/
+
+
+.play{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.toggle-container{
+    margin: 20px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 200px;
+    border: 3px solid #6d6d6b;
+    border-radius: 9px;
+    background-color: #918f8f;
+    color: rgb(0, 0, 0);
+    transition: transform 0.3s;
+    
+}
+
+.toggle-container:hover{
+    transform: scale(1.1);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+    margin-left: 10px;
+}
+  
+.switch input {
+    display: none;
+}
+  
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: center;
+    border: 2px solid black;
+    box-sizing: border-box;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 28px;
+    left: -3px;
+    top: -4px;
+    background-color: #d63c3c;
+    border: 2px solid black;
+    box-sizing: border-box;
+    transition: .4s;
+    border-radius: 20%;
+}
+  
+input:checked + .slider {
+    background-color: rgb(206, 206, 206);
+}
+  
+input:checked + .slider:before {
+    transform: translateX(26px);
+    background-color: #26c6da;
+}
+
 img{
+    cursor: pointer;
+    transition: transform 0.3s;
+    margin-bottom: 10px;
+}
+
+img:hover{
+    transform: scale(1.1);
+}
+
+button {
+    background-color: transparent;
+    border: 0;
+    font-size: 20px;
+    margin-top: 20px;
+    font-family: "Roboto Mono", monospace;
+    cursor: pointer;
+    transition: transform 0.3s;
+    color: white;
+}
+
+button:hover{
+    transform: scale(1.2);
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
     cursor: pointer;
 }
 
+/*---- GamePage ----*/
+#menu{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#pause{
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid #6d6d6b;
+    margin: 20px 0px;
+}
 .container{
     display: flex;
     flex-direction: column;
@@ -27,7 +183,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 420px;
+    width: 100%;
 
 }
 
@@ -94,7 +250,7 @@ div{
 
 #result{
     height: 40px;
-    width: 420px;
+    width: 100%;
 }
 
 footer{
@@ -115,26 +271,60 @@ footer{
         width: 35px;
         height: 35px;
     }
-    header{
-        width: 370px;
-    }
     footer{
         font-size: 20PX;
     }
 }
 
-@media (max-height : 720px){
+@media (max-width : 390px){
+    .grid{
+        width: 300px;
+        height: 300px;
+    }
+    .valid, .bomb{
+        width: 30px;
+        height: 30px;
+    }
+    footer{
+        font-size: 20PX;
+    }
+    #pause{
+        height: 40px;
+    }
+    .toggle-container{
+        height: 35px;
+        width: 180px;
+    }
+}
+
+@media (max-height : 785px){
+    .container{
+        margin-top: 100px;
+    }
     footer{
         margin-top: 50px;
     }
 }
 
-@media (max-height : 660px){
+
+@media (max-height : 733px){
     .container{
         margin-top: 50px;
     }
     footer{
-        margin-top: 40px;
+        margin-top: 30px;
+    }
+    
+}
+
+@media (max-height : 655px){
+    .style{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    footer{
+        margin-left: 100px;
     }
     
 }
