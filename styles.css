@@ -271,6 +271,9 @@ footer{
         width: 35px;
         height: 35px;
     }
+    .bomb{
+        font-size: 20px;
+    }
     footer{
         font-size: 20PX;
     }

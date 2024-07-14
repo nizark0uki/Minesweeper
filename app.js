@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         squares.forEach(function(square){
             if (square.classList.contains('bomb')){
                 square.innerHTML ='💣'
-                square.classList.remove('bomb')
+                // square.classList.remove('bomb')
                 square.classList.add('checked')
             } else if (!square.classList.contains('bomb') && square.classList.contains('flag'))
                 square.innerHTML = '❌'
